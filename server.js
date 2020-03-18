@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 // Configure CORS
 app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Origin",
-       "https://intense-tor-95063.herokuapp.com/");
+       "https://intense-tor-95063.herokuapp.com");
    res.header("Access-Control-Allow-Headers",
        "Origin, X-Requested-With, Content-Type, Accept");
    res.header("Access-Control-Allow-Methods",
