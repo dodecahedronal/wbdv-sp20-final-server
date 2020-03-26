@@ -28,6 +28,9 @@ app.use(session({
 
 var bookService = require('./services/book.service.server.js')(app);
 var userService = require('./services/user.service.server.js');
+var reviewService = require('./services/review.service.server.js')(app);
+var threadService = require('./services/thread.service.server.js')(app);
+var commentService = require('./services/comment.service.server.js')(app);
 userService(app);
 
 console.log("server started")

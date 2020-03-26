@@ -5,6 +5,7 @@ users =[
     {'username': 'alice',
      'password': 'alice'}
 ]
+
 findAllUsers = () => {
     return users;
 }
