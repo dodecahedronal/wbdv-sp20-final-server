@@ -20,13 +20,13 @@ findAllReviews = () => {
 findReviewsByUserId = (userId) =>
 {
     //let ret = reviews.filter(r=>userId == r.userId);
-    return reviewModel.findOne({userId: userId})
+    return reviewModel.find({userId: userId})
 }
 
 findReviewsByBookId = (bookId) =>
 {
     //let ret = reviews.filter(r=>bookId == r.bookId);
-    return reviewModel.findOne({bookId: bookId});
+    return reviewModel.find({bookId: bookId});
 }
 
 createReview = (review) => {

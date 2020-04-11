@@ -13,6 +13,7 @@ if(process.env.MLAB_USERNAME_WEBDEV) {
 
 const mongoose = require('mongoose')
 mongoose.connect(connectionString,
+    //'mongodb://admin:admin123@ds163738.mlab.com:63738/heroku_6zmrbdr9',
     //'mongodb://localhost:27017/hellobooks',
     { useNewUrlParser: true, useUnifiedTopology: true })
 
