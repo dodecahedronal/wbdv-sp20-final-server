@@ -1,17 +1,16 @@
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     const userModel = require('../models/user.model.server');
 
     findAllUsers = (req, res) => {
-        /*
         userModel.findAllUsers()
             .then(users => {
                 res.send(users);
             });
-        */
-       const users = userModel.findAllUsers();
-       res.json(users);
+
+        //const users = userModel.findAllUsers();
+        //res.json(users);
     }
 
     currentUser = (req, res) => {
@@ -27,36 +26,39 @@ module.exports = function(app) {
     }
 
     createUser = (req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
         var user = req.body;
-        /*
+        
         userModel.createUser(user)
             .then(function (user) {
                 req.session['currentUser'] = user;
                 res.json(req.session['currentUser']);
+                res.status(200);
+                res.json(user);
             })
-        */
-       userModel.createUser(user);
-       //req.session['currentUser'] = user;
-       res.status(200);
-       res.json(user);
+        //userModel.createUser(user);
+        //req.session['currentUser'] = user;
+        
     }
 
     login = (req, res) => {
         const user = req.body;
-        /*
+    
         userModel.findUserByCredentials(user.username, user.password)
             .then(user => {
                 if (user == null) {
-                    res.send(null);
+                    res.status(404);
+                    res.send('login failed');
                 }
                 else {
                     req.session['currentUser'] = user;
+                    res.status(200);
                     res.json(req.session['currentUser']);
                 }
             });
-        */
-       let found = userModel.findUserByCredentials(user.username, user.password);
+    
+       /*
+        let found = userModel.findUserByCredentials(user.username, user.password);
         if (found == null) {
             res.status(404);
             res.send('login failed');
@@ -66,12 +68,13 @@ module.exports = function(app) {
             res.status(200);
             res.json(req.session['currentUser']);
         }
+        */
     };
 
     logout = (req, res) => {
         req.session.destroy((err) => {
             res.send('Logged out');
-          });
+        });
     }
 
     findUserByUsername = (req, res) => {

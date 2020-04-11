@@ -1,5 +1,6 @@
-
-//const userModel = mongoose.model('UserModel', userSchema);
+const mongoose = require('mongoose')
+const userSchema = require('./user.schema.server')
+const userModel = mongoose.model('UserModel', userSchema)
 
 users =[
     {'username': 'alice',
@@ -7,19 +8,23 @@ users =[
 ]
 
 findAllUsers = () => {
-    return users;
+    return userModel.find();
+    //return users;
 }
-//userModel.find();
 
 findUserByCredentials = (username, password) => {
+    /*
     for (var i=0; i<users.length; i++) {
         if (users[i].username === username)
             return users[i];
     }
 
     return null;
+    */
+
+    return userModel.findOne({username: username, password: password}); 
 }
-//userModel.findOne({username: username, password: password});
+
 
 findUserById = userId => {
     return users;
@@ -37,16 +42,15 @@ userModel
 */
 
 createUser = (user) => {
-    users.push(user);
+    //users.push(user);
+    return userModel.create(user);
 }
-//userModel.create(user);
-
 
 findUserByUsername = (username) =>
 {
-    return users;
+    return userModel.findOne({username: username});
 }
-//userModel.findOne({username: username});
+
 
 updateUser = (user, userId) =>{
     return users
