@@ -41,8 +41,26 @@ module.exports = function(app) {
         //threadModel.createThread(thread);
     }
 
+    deleteThread = (req,res) => {
+        let threadId = req.params['tid']
+        threadModel.deleteThread(threadId)
+            .then(deleteInfo => {
+                res.status(200);
+                res.send(deleteInfo)
+            })
+    }
+
+    updateThread = (req, res) => {
+        let threadId = req.params['tid']
+        let thread = req.body
+        threadModel.updateThread(threadId, thread)
+            .then(thread => res.json(thread))
+    }
+
     app.post('/api/thread', createThread);
     app.get('/api/thread', findAllThreads);
     app.get('/api/user/:uid/thread', findThreadsByUserId);
     app.get('/api/book/:bid/thread', findThreadsByBookId);
+    app.delete('/api/thread/:tid', deleteThread);
+    app.put('/api/thread/:tid', updateThread);
 };

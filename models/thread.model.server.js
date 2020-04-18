@@ -29,9 +29,23 @@ createThread = (thread) => {
     //threads.push(thread);
 }
 
+deleteThread = (threadId) => {
+    return threadModel.deleteOne({_id: threadId}, (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+}
+
+updateThread = (threadId, thread) => {
+    return threadModel.findOneAndUpdate({_id: threadId}, thread, {new: true, useFindAndModify: false})
+}
+
 module.exports = {
     findAllThreads,
     findThreadsByUserId,
     findThreadsByBookId,
-    createThread
+    createThread,
+    deleteThread,
+    updateThread
 };
