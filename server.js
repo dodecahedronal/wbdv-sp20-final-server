@@ -2,7 +2,8 @@ var express = require('express')
 var app = express()
 var session = require('express-session')
 var bodyParser = require('body-parser')
-var connectionString = 'mongodb://localhost:27017/hellobooks'
+var connectionString = 'mongodb://admin:admin123@ds163738.mlab.com:63738/heroku_6zmrbdr9'
+//var connectionString = 'mongodb://localhost:27017/hellobooks'
 
 if(process.env.MLAB_USERNAME_WEBDEV) {
     var username = process.env.MLAB_USERNAME_WEBDEV;

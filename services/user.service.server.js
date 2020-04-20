@@ -41,6 +41,22 @@ module.exports = function (app) {
         
     }
 
+    deleteUser = (req, res) => {
+        let userId = req.params['uid']
+        userModel.deleteUser(userId)
+            .then(deleteInfo => {
+                res.status(200);
+                res.send(deleteInfo)
+            })
+    }
+
+    updateUser = (req, res) => {
+        let userId = req.params['uid']
+        let user = req.body
+        userModel.updateUser(userId, user)
+            .then(user => res.json(user))
+    }
+
     login = (req, res) => {
         const user = req.body;
     
@@ -77,6 +93,14 @@ module.exports = function (app) {
         });
     }
 
+    findUserById = (req, res) => {
+        let userId = req.params['uid']
+        userModel.findUserById(userId)
+            .then(function (user) {
+                res.json(user);
+            })
+    }
+
     findUserByUsername = (req, res) => {
         let username = req.params['username']
         userModel.findUserByUsername(username)
@@ -98,7 +122,8 @@ module.exports = function (app) {
         }
     }
 
-    updateUser = (req, res) => {
+    /*
+    updateProfile = (req, res) => {
         var user = req.body;
         var userId = req.session['currentUser']._id;
         userModel.updateUser(user, userId)
@@ -106,7 +131,9 @@ module.exports = function (app) {
                 res.json(user);
             })
     }
+    */
 
+    /*
     deleteProfile = (req, res) => {
         var user = req.session['currentUser'];
         userModel.removeProfile(user)
@@ -114,14 +141,18 @@ module.exports = function (app) {
                 res.json(user);
             })
     }
+    */
 
     app.get('/api/current', currentUser);
     app.get('/api/user', findAllUsers);
+    app.get('/api/user/:uid', findUserById)
     app.post('/api/login', login);
     app.post('/api/register', createUser);
+    app.delete('/api/user/:uid', deleteUser);
+    app.put('/api/user/:uid', updateUser);
     app.post('/api/logout', logout);
     app.get('/api/username/:username', findUserByUsername);
     app.get('/api/profile', profile);
-    app.put('/api/profile', updateUser);
-    app.delete('/api/profile', deleteProfile);
+    //app.delete('/api/profile', deleteProfile);
+    //app.put('/api/profile', updateProfile);
 };

@@ -27,9 +27,9 @@ findUserByCredentials = (username, password) => {
 
 
 findUserById = userId => {
-    return users;
+    return userModel.findById(userId)
+    //return users;
 }
-//userModel.findById(userId)
 
 findUserByIdExpanded = userId => {
     return users;
@@ -51,21 +51,29 @@ findUserByUsername = (username) =>
     return userModel.findOne({username: username});
 }
 
-
-updateUser = (user, userId) =>{
-    return users
+deleteUser = (userId) => {
+    return userModel.deleteOne({_id: userId}, (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
 }
+
+updateUser = (userId, user) =>{
+    return userModel.findOneAndUpdate({_id: userId}, user, {new: true, useFindAndModify: false})
+}
+
 /*
-    userModel.update({
-        _id: userId
-    }, {
-        $set: user
-    });
+updateProfile = () => {
+
+}
 */
 
+/*
 removeProfile = (profile) =>{
     return users;
 }
+*/
 //userModel.find(profile).remove().exec();
 
 module.exports = {
@@ -76,5 +84,5 @@ module.exports = {
     createUser,
     findUserByUsername,
     updateUser,
-    removeProfile
+    //removeProfile
 };
