@@ -6,6 +6,9 @@ module.exports = function (app) {
     findAllUsers = (req, res) => {
         userModel.findAllUsers()
             .then(users => {
+                for (var i=0; i<users.length; i++) {
+                    users[i].password=''
+                }
                 res.send(users);
             });
 
