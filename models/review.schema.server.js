@@ -4,6 +4,7 @@ const reviewSchema = mongoose.Schema({
     content: String,
     userId: String,
     bookId: String,
+    username: String,
     reviewTime: { type : Date, default: Date.now }
 }, { collection: 'review' })
 module.exports = reviewSchema
