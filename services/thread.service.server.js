@@ -24,6 +24,7 @@ module.exports = function(app) {
         let bookId = req.params['bid']
         threadModel.findThreadsByBookId(bookId)
             .then(function (threads) {
+                console.log(threads)
                 res.json(threads);
             })
     }

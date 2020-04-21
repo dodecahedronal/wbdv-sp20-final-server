@@ -48,9 +48,27 @@ module.exports = function(app) {
         //commentModel.createComment(comment);
     }
 
+    deleteComment = (req,res) => {
+        let commentId = req.params['cid']
+        commentModel.deleteComment(commentId)
+            .then(deleteInfo => {
+                res.status(200);
+                res.send(deleteInfo)
+            })
+    }
+
+    updateComment = (req, res) => {
+        let commentId = req.params['cid']
+        let comment = req.body
+        threadModel.updateComment(commentId, comment)
+            .then(comment => res.json(comment))
+    }
+
     app.post('/api/comment', createComment);
     app.get('/api/comment', findAllComments);
     app.get('/api/user/:uid/comment', findCommentsByUserId);
     app.get('/api/thread/:tid/comment', findCommentsByThreadId);
     app.get('/api/book/:bid/comment', findCommentsByBookId);
+    app.delete('/api/comment/:cid', deleteComment);
+    app.put('/api/comment/:cid', updateComment);
 };

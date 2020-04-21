@@ -34,10 +34,24 @@ findCommentsByBookId = (bookId) => {
     return commentModel.find({bookId: bookId})
 }
 
+deleteComment = (commentId) => {
+    return commentModel.deleteOne({_id: commentId}, (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+}
+
+updateComment = (commentId, comment) => {
+    return commentModel.findOneAndUpdate({_id: commentId}, comment, {new: true, useFindAndModify: false})
+}
+
 module.exports = {
     findAllComments,
     findCommentsByUserId,
     findCommentsByThreadId,
     findCommentsByBookId,
-    createComment
+    createComment,
+    deleteComment,
+    updateComment
 };
