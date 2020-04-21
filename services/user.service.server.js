@@ -1,4 +1,4 @@
-
+const mongoose = require('mongoose')
 module.exports = function (app) {
 
     const userModel = require('../models/user.model.server');
@@ -51,10 +51,13 @@ module.exports = function (app) {
     }
 
     updateUser = (req, res) => {
-        let userId = req.params['uid']
+        let userId = mongoose.Types.ObjectId(req.params['uid'])
         let user = req.body
         userModel.updateUser(userId, user)
-            .then(user => res.json(user))
+            .then(user => {
+                req.session['currentUser'] = user;
+                res.json(user)
+            })
     }
 
     login = (req, res) => {
