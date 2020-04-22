@@ -34,9 +34,18 @@ createReview = (review) => {
     //reviews.push(review);
 }
 
+deleteReview = (reviewId) => {
+    return reviewModel.deleteOne({_id: reviewId}, (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+}
+
 module.exports = {
     findAllReviews,
     findReviewsByUserId,
     findReviewsByBookId,
-    createReview
+    createReview, 
+    deleteReview
 };

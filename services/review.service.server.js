@@ -55,8 +55,18 @@ module.exports = function (app) {
         //reviewModel.createReview(review);
     }
 
+    deleteReview = (req,res) => {
+        let reviewId = req.params['rid']
+        reviewModel.deleteReview(reviewId)
+            .then(deleteInfo => {
+                res.status(200);
+                res.send(deleteInfo)
+            })
+    }
+
     app.post('/api/review', createReview);
     app.get('/api/review', findAllReviews);
+    app.delete('/api/review/:rid', deleteReview)
     app.get('/api/user/:uid/review', findReviewsByUserId);
     app.get('/api/book/:bid/review', findReviewsByBookId);
 };
