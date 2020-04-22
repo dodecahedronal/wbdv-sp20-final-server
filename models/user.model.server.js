@@ -84,5 +84,6 @@ module.exports = {
     createUser,
     findUserByUsername,
     updateUser,
+    deleteUser,
     //removeProfile
 };

@@ -73,6 +73,7 @@ module.exports = function (app) {
                     res.send('login failed');
                 }
                 else {
+                    user.password=''
                     req.session['currentUser'] = user;
                     res.status(200);
                     res.json(req.session['currentUser']);
@@ -103,6 +104,7 @@ module.exports = function (app) {
         let userId = req.params['uid']
         userModel.findUserById(userId)
             .then(function (user) {
+                user.password=''
                 res.json(user);
             })
     }
@@ -111,6 +113,7 @@ module.exports = function (app) {
         let username = req.params['username']
         userModel.findUserByUsername(username)
             .then(function (user) {
+                user.password=''
                 res.json(user);
             })
     }
@@ -123,6 +126,7 @@ module.exports = function (app) {
             var userId = req.session['currentUser']._id;
             userModel.findUserById(userId)
                 .then(function (user) {
+                    user.password=''
                     res.send(user);
                 })
         }
