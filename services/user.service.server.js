@@ -113,8 +113,13 @@ module.exports = function (app) {
         let username = req.params['username']
         userModel.findUserByUsername(username)
             .then(function (user) {
-                user.password=''
-                res.json(user);
+
+                if (user) {
+                    user.password=''
+                    res.json(user);
+                } else {
+                    res.json('NO USER FOUND')
+                }
             })
     }
 
